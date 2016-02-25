@@ -30,30 +30,26 @@ NOTE: This documentation is rather basic as this was open-sourced by specific re
 How to use QR Code Encoder with Elixir
 ======================================
 
-For now, the only way to compile qrcode is to start erlang, and compile all the files manually.
+Add :qrcode to `mix.deps`
 ::
 
-    cd src
-    erl
+    defp deps do
+      [{:qrcode, git: “git@gitlab.com:Pacodastre/qrcode.git”}]
+    end
 
-    # In the interpreter, type the following:
-    c(gf256)
-    c(qrcode_demo)
-    c(qrcode_mask)
-    c(qrcode_matrix)
-    c(base32)
-    c(bits)
-    c(qrcode_demo)
-    c(qrcode)
-    c(qrcode_reedsolomon)
+Then run:
+::
 
-Then, whenever you have this compiled, you should have access to the functions avaiable in elixir.
+    mix deps.get
+    mix deps.compile
 
- iex(1)> qrcode = :qrcode.encode(“bla”)
- {:qrcode, 1, :M, 29,
-  <<0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 254, 211, 248, 4, 16, 208, 64, 46, 152, ...>>}
-  iex(2)> png = :qrcode_demo.simple_png_encode(qrcode)
-  <<137, 80, 78, 71, 13, 10, 26, 10, 0, 0, 0, 13, 73, 72, 68, 82, 0, 0, 0, 232, 0, 0, 0, ...>>
-  iex(3)> :file.write_file(“example.png”, png)
-  :ok
+Then, whenever you have this compiled, you should have access to the functions available in elixir.
+
+    iex(1)> qrcode = :qrcode.encode(“bla”)
+    {:qrcode, 1, :M, 29,
+     <<0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 254, 211, 248, 4, 16, 208, 64, 46, 152, ...>>}
+     iex(2)> png = :qrcode_demo.simple_png_encode(qrcode)
+     <<137, 80, 78, 71, 13, 10, 26, 10, 0, 0, 0, 13, 73, 72, 68, 82, 0, 0, 0, 232, 0, 0, 0, ...>>
+     iex(3)> :file.write_file(“example.png”, png)
+     :ok
 
